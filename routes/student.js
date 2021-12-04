@@ -17,67 +17,109 @@ router.get('/', function(req, res, next) {
 router.get('/viewQuiz', function(req, res, next) {
   console.log("Now in View Quiz");
   const id= req.body.quizId;
-  const quiz=Quiz.findById(id).exec();
-  res.json(quiz);
-  
+  Quiz.findById(id).then((quiz) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(quiz);
+})
+.catch((err) => next(err));  
 });
 
 /* Get attempt Quiz. */
 router.get('/attemptQuiz', function(req, res, next) {
   console.log("Now in Ateempt Quiz");
   const id= res.body.quizId;
-  const quiz=Quiz.findById(id).exec();
-  res.json(quiz);
-}); 
+  Quiz.findById(id).then((quiz) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(quiz);
+})
+.catch((err) => next(err));  
+});
 
 /* GET all the posted assignments. */
 router.get('/viewAssignment/:id', function(req, res, next) {
   console.log("Now in View Assignment");
   const id= req.params.id; //specific assignment accessed by student
-  const assignment=Assignment.findById(id).exec();
-  res.json(assignment)
+  Assignment.findById(id).then((assignment) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(assignment);
+})
+.catch((err) => next(err));  
 });
 
 /* Post assignment . */
 router.post('/submitAssignment', function(req, res, next) {
   console.log("Now in Post Assignment");
   const obj= res.body;
-  const assignment=Assignment.create(obj).exec();
-  res.json(assignment);
+  Assignment.create(obj).then((assignment) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(assignment);
+})
+.catch((err) => next(err));  
 });
+
 
 /* GET all material. */
 router.get('/material', function(req, res, next) {
-  const mtr= Material.find({}).exec();
-  res.json(mtr);
+    Material.find({}).then((mtr) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(mtr);
+})
+.catch((err) => next(err));  
 });
+
 
 /* GET Material related to a Id*/
 router.get('/material/:id', function(req, res, next) {
   console.log("Now in View Material");
-  const mtr=Material.findById(req.params.id).exec();
-  res.json(mtr);
+    Material.findById(req.params.id).then((mtr) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(mtr);
+})
+.catch((err) => next(err));  
 });
+
 
 /* Get Material related to a subject. */
 router.get('/material/:subid', function(req, res, next) {
   console.log("Now in View Material by subId");
   const SubID= req.params.subid;
-  const mtr = Material.find({class: SubID });
-  res.json(mtr);
+  Material.find({class: SubID }).then((mtr) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(mtr);
+})
+.catch((err) => next(err));  
 });
+
+
 
 /* Get all results */
 router.get('/result', function(req, res, next) {
-const result=result.find({student:id}).populate("Student").populate("Class");
-res.json(result);
+Result.find({student:id}).populate("Student").populate("Class").then((result) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.json(result);
+})
+.catch((err) => next(err));  
 });
+
+
 
 /* get Results with ID */
 router.get('/result:id', function(req, res, next) {
 const id = req.params.id;
-const result=result.find({student:id}).populate("Student").populate("Class");
-res.json(result);
+  Result.find({student:id}).populate("Student").populate("Class").then((result) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.json(result);
+})
+.catch((err) => next(err));  
 });
 
 
