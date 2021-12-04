@@ -10,7 +10,7 @@ const Material = require("../models/material");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('Now in Student Home ');
+  res.send('Now in Student ');
 });
 
 /* View Quiz. */

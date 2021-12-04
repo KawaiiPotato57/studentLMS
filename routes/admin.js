@@ -57,7 +57,7 @@ router.get('/students/:id', function(req, res, next) {
 
 });
 router.get('/teachers/:id', function(req, res, next) {
-    Teacher.findById(req.params.id)
+    Teacher.findById(req.params.id) 
         .then((teacher) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
